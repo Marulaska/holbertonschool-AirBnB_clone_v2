@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 from os import getenv
 from models.base_model import Base
+from models import classes
 
 
 class DBStorage:
@@ -28,8 +29,6 @@ class DBStorage:
 
     def all(self, cls=None):
         """ Queries all objects in the current session """
-
-        from models import classes
 
         objects = {}
         if cls:
@@ -58,15 +57,15 @@ class DBStorage:
 
     def delete(self, obj=None):
         """ Deletes obj from the current session if not None """
-        if obj:
+        if obj is not None:
             self.__session.delete(obj)
             self.save()
 
     def reload(self):
         """ Creates all tables in the database and creates a session """
         Base.metadata.create_all(self.__engine)
-        # self.__session = scoped_session(sessionmaker(
-        #     bind=self.__engine, expire_on_commit=False))
+        self.__session = scoped_session(sessionmaker(
+            bind=self.__engine, expire_on_commit=False))
 
     def close(self):
         """ Calls close() on the private session attribute """
