@@ -41,7 +41,7 @@ def print_txt(text='is_cool'):
     Returns:
         f format, c text
     """
-    return "Python" + text.replace('_', ' ')
+    return "Python " + text.replace('_', ' ')
 
 
 if __name__ == '__main__':

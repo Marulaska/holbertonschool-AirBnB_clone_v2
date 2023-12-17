@@ -41,7 +41,7 @@ def print_txt(text='is_cool'):
     Returns:
         f format, c text
     """
-    return "Python" + text.replace('_', ' ')
+    return "Python " + text.replace('_', ' ')
 
 
 @app.route('/number/<int:n>', strict_slashes=False)
