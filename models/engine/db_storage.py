@@ -64,9 +64,7 @@ class DBStorage:
     def reload(self):
         """ Creates all tables in the database and creates a session """
         Base.metadata.create_all(self.__engine)
-        Session = scoped_session(sessionmaker(bind=self.__engine,
-                                              expire_on_commit=False))
-        self.__session = Session()
+        self.__session = scoped_session(sessionmaker(bind=self.__engine, expire_on_commit=False))
 
     def close(self):
         """ Calls close() on the private session attribute """
