@@ -22,14 +22,17 @@ def teardown_appcontext(exception=None):
 app.teardown_appcontext(teardown_appcontext)
 
 
-@app.route('/states_list', strict_slashes=False)
-def states_list():
+@app.route('/cities_by_states', strict_slashes=False)
+def cities_by_states():
     """
     Returns:
-        Hello HBNB
+        city + state list
     """
     states = storage.all(State)
-    return render_template('8-cities_by_states.html', states=states)
+    sorted_states = {state.id: state for state in
+                     sorted(states.values(), key=lambda x: x.name)}
+
+    return render_template('8-cities_by_states.html', states=sorted_states)
 
 
 if __name__ == '__main__':
