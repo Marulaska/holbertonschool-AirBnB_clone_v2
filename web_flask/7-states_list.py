@@ -9,6 +9,18 @@ from models.state import State
 app = Flask(__name__)
 
 
+def teardown_appcontext(exception=None):
+    """_summary_
+
+    Args:
+        exception (_type_, optional): _description_. Defaults to None.
+    """
+    storage.close()
+
+
+app.teardown_appcontext(teardown_appcontext)
+
+
 @app.route('/states_list', strict_slashes=False)
 def states_list():
     """
