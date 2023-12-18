@@ -28,7 +28,8 @@ def states_list():
         Hello HBNB
     """
     states = storage.all(State)
-    sorted_states = {state.id: state for state in sorted(states.values(), key=lambda x: x.name)}
+    sorted_states = {state.id: state for state in
+                     sorted(states.values(), key=lambda x: x.name)}
     return render_template('7-states_list.html', states=sorted_states)
 
 
